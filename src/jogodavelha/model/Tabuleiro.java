@@ -7,6 +7,10 @@ public class Tabuleiro {
 
     private ArrayList<String> campos = new ArrayList<String>(Arrays.asList("1","2","3","4","5","6","7","8","9"));
 
+
+    public Tabuleiro() {
+    }
+
     @Override
     public String toString() {
         return  " "+ campos.get(0)+" | "+ campos.get(1)+" | "+ campos.get(2)+"\n" +

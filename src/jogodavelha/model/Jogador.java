@@ -5,9 +5,11 @@ public class Jogador {
     private String nome;
     private String simbolo;
     private int pontos = 0;
+    private int pontosSeguidos = 0;
     private boolean minhaVez = false;
 
     public Jogador() {
+
     }
 
     public Jogador(String simbolo) {
@@ -44,5 +46,13 @@ public class Jogador {
 
     public void setMinhaVez(boolean minhaVez) {
         this.minhaVez = minhaVez;
+    }
+
+    public int getPontosSeguidos() {
+        return pontosSeguidos;
+    }
+
+    public void setPontosSeguidos(int pontosSeguidos) {
+        this.pontosSeguidos = pontosSeguidos;
     }
 }
