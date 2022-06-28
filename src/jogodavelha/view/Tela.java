@@ -7,13 +7,22 @@ import java.util.Scanner;
 public class Tela {
 
     private ControleDoJogo controleDoJogo;
+    private boolean repetirTela = false;
 
     public Tela() {
         controleDoJogo = new ControleDoJogo();
-
         menuApresentacao();
-        controleDoJogo.marcarNoCampo(escolherLocalParaMarcar());
-        controleDoJogo.amostraTabuleiro();
+        telaDuranteJogo();
+
+
+    }
+
+    public void telaDuranteJogo() {
+        while (repetirTela==false) {
+            controleDoJogo.marcarNoCampo(escolherLocalParaMarcar());
+            anuncioFimPartida(controleDoJogo.fimDePartida(controleDoJogo.verificaSeGanhou()), controleDoJogo.isFimDePartida());
+            controleDoJogo.passarDosTurnos();
+        }
     }
 
 
@@ -36,22 +45,31 @@ public class Tela {
         Scanner leitor = new Scanner(System.in);
         String posicaoMarcada;
         String jogador = controleDoJogo.quemVaiJogar();
-        System.out.println("Vez de -> "+jogador);
+        System.out.println("|........................");
+        System.out.println("|Vez de -> "+jogador);
+        System.out.println("|........................");
         System.out.println("Escolha o local do Tabuleiro que deseja marcar:\n");
-        controleDoJogo.amostraTabuleiro();
+        System.out.println(controleDoJogo.mostraTabuleiro());
+        System.out.print("-> ");
         posicaoMarcada = leitor.nextLine();
         System.out.println("\nJogada feita!");
 
         return posicaoMarcada;
     }
 
-    public String anuncioFimPartida(String ganhador){
-        Scanner leitor = new Scanner(System.in);
-        String resposta;
-        System.out.println(ganhador);
-        System.out.print("\nDeseja começar outra partida?\n-");
-        resposta = leitor.nextLine();
-        return resposta;
+    public void anuncioFimPartida(String ganhador, boolean fimDePartida){
+        if (fimDePartida) {
+            Scanner leitor = new Scanner(System.in);
+            String resposta;
+            System.out.println(ganhador);
+            System.out.print("\nDeseja começar outra partida? (s/n)\n-");
+            resposta = leitor.nextLine();
+            repetirTela = controleDoJogo.jogarOutraPartida(resposta);
+        }
+        else {
+            //continua jogo
+        }
+
     }
 
 
